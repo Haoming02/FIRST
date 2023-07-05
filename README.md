@@ -1,4 +1,4 @@
-# FIRST - **F**rame **I**nterpolation **R**efined with **S**table diffusion via control **N**et
+# FIRST - **F**rame **I**nterpolation **R**efined with **S**table diffusion via control ne**T**
 
 <h5 align="center">Problem Statement</h5>
 
@@ -64,13 +64,18 @@ A simple Python GUI that streamlines this process
     - Recommended to set `Model cache size` to `2` as well
 1. Launch Automatic1111 with `api` enabled
     - Open the `webui-user.bat` and add `--api` after `COMMANDLINE_ARGS=`
-2. Launch `main.py` to open the GUI
+    - Set your checkpoint accordingly *(Realistic / Anime)*
+2. **(Optionally)** Edit `parameters.py` to change the Stable Diffusion settings, such as `steps` or `sampler`
+3. Launch `main.py` to open the GUI
     - On Windows, you can just use `launch.bat`
-3. Enter the path containing the frames
+    
+4. Enter the path containing the frames
     - The path should contain both the original and the interpolated frames in sequence *(Default behavior of `Flowframes` when you set the export to `Image Sequence`)*
-4. Enter the path for the output
-    - Recommended to set a difference path from Source
-5. Enter the port *(default is `7860`)*
-6. Press **Run**
-7. Check the console for progress
-8. Use `FFmpeg` to merge the frames into video
+    - Only supports **2x** interpolations, meaning the odd files should be original frames while even files should be interpolated frames
+5. Enter the path to store the outputs
+    - Recommended to set a different path from Source
+6. Enter the port 
+    - The default is `7860`
+7. Press **Run**
+8. Check the console for progress
+9. Use `FFmpeg` to merge the frames into video
