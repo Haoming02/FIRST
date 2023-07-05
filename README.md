@@ -1,13 +1,14 @@
 # FIRST - **F**rame **I**nterpolation **R**efined with **S**table diffusion via control **N**et
 
-## Abstract
-##### Problem Statement
+<h5 align="center">Problem Statement</h5>
+
 Traditional frame interpolation techniques were mainly trained on the motions and colors of pixels.
 As such, they work better for frames with relatively little difference in between. When the difference is too significant,
 the estimations become unreliable, and the algorithms essentially start guessing,
 resulting in ghosting artifacts that people usually associate with frame interpolation.
 
-##### Proposed Solution
+<h5 align="center">Proposed Solution</h5>
+
 **Stable Diffusion**, on the other hand, is a generative model capable of creating more coherent pixels instead of artifacts.
 By combining the newly introduced `reference_only` module from **ControlNet**, which influences the generated result with provided references as the name implies,
 and the `img2img` feature from Stable Diffusion, you can refine the interpolated frame and generate a more cohesive result.
@@ -19,7 +20,7 @@ and the `img2img` feature from Stable Diffusion, you can refine the interpolated
     <thead align="center">
         <tr>
             <td><b>Previous Frame</b></td>
-            <td><b>Base</b></td>
+            <td><b>RIFE</b></td>
             <td><b>F.I.R.S.T</b></td>
             <td><b>Next Frame</b></td>
         </tr>
@@ -40,12 +41,36 @@ and the `img2img` feature from Stable Diffusion, you can refine the interpolated
     </tbody>
 </table>
 
-<p align="center"><b><i>These screenshots were used solely for academic purposes</i></b></p>
+## Sample Videos
 
-> Sample Videos Coming Soon...
+<h5 align="center">RIFE</h5>
+<p align="center"><img src="sample/RIFE.gif"></p>
+
+<h5 align="center">F.I.R.S.T</h5>
+<p align="center"><img src="sample/FIRST.gif"></p>
+
+<p align="center"><b><i>Above contents were used solely for research purposes</i></b></p>
 
 ## Code
-***Coming Soon...***
+A simple Python GUI that streamlines this process
 
-I only used existing projects to accomplish this. You can also achieve this on your own for free.
-I am simply developing a simple script that includes a user interface to streamline this process.
+#### Prerequisite
+- [Automatic1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui) Webui
+- [sd-webui-controlnet](https://github.com/Mikubill/sd-webui-controlnet) Extension
+- (Highly Recommended) [FFmpeg](https://ffmpeg.org/)
+
+#### How to Use
+0. In the settings of Automatic1111, set `Multi ControlNet: Max models amount` to `2` or above
+    - Recommended to set `Model cache size` to `2` as well
+1. Launch Automatic1111 with `api` enabled
+    - Open the `webui-user.bat` and add `--api` after `COMMANDLINE_ARGS=`
+2. Launch `main.py` to open the GUI
+    - On Windows, you can just use `launch.bat`
+3. Enter the path containing the frames
+    - The path should contain both the original and the interpolated frames in sequence *(Default behavior of `Flowframes` when you set the export to `Image Sequence`)*
+4. Enter the path for the output
+    - Recommended to set a difference path from Source
+5. Enter the port *(default is `7860`)*
+6. Press **Run**
+7. Check the console for progress
+8. Use `FFmpeg` to merge the frames into video
